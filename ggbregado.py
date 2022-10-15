@@ -1,13 +1,4 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-
-"""
-This script provides ciphers for lab 02.01 for NAU's Information Security
-course.
-"""
-
 import random
-
 
 class GammaEncryptor(object):
     BYTE_MAX = 255
@@ -43,52 +34,7 @@ class GammaEncryptor(object):
         return [self.rng.randint(0, self.BYTE_MAX) for _ in message.encode()]
 
 
-class AnalyticalEncryptor(object):
-    def __init__(self):
-        pass
-
-    def shift_enc(symbol, key=1, *args, **kwargs):
-        return chr(ord(symbol) + key)
-
-    def shift_dec(symbol, key=1, *args, **kwargs):
-        return chr(ord(symbol) - key)
-
-    @staticmethod
-    def t01_cipher_substitution(message, subst_func, *args, **kwargs):
-        """Implements an analytical cipher for task 04.
-        Args:
-            message (str): a plaintext message
-            subst_func (func): a function that performs substition on an
-                individual symbol.
-        Returns:
-            Ciphertext.
-        """
-        ciphertext = None
-
-        ciphertext = "".join([
-            subst_func(symbol, *args, **kwargs)
-            for symbol in message
-        ])
-
-        return ciphertext
-
-    def encrypt(self, message, key, subst_func=shift_enc):
-        res = self.t01_cipher_substitution(
-            message,
-            subst_func=subst_func,
-            key=key
-        )
-        return res
-
-    def decrypt(self, message, key, subst_func=shift_dec):
-        res = self.t01_cipher_substitution(
-            message,
-            subst_func=subst_func,
-            key=key
-        )
-        return res
-
-
+    
 def print_process(msg_in, key, msg_out, process):
     print(
         "Process: {}\n"
